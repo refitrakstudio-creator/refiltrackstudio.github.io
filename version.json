@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "releaseDate": "2026-02-06",
+  "minVersion": "1.0.0",
+  "changelog": {
+    "pl": "Pierwsza wersja aplikacji",
+    "en": "First release"
+  },
+  "downloadUrl": "https://play.google.com/store/apps/details?id=com.abacusai.app.t1770386773"
+}

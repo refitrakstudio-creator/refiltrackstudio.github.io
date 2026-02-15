@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RefiTrak - Zarządzanie czynnikami chłodniczymi</title>
+    <meta name="description" content="Profesjonalna aplikacja dla techników HVAC do zarządzania magazynem czynników chłodniczych. Stworzony przez chłodniarza dla chłodniarzy.">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #E65100;
+            --primary-light: #FF8A65;
+            --dark: #5D4037;
+            --light-bg: #FAFAFA;
+            --white: #FFFFFF;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--light-bg);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--dark); text-decoration: none; font-weight: 500; }
+        .nav-links a:hover { color: var(--primary); }
+        .lang-switch {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        
+        /* Hero */
+        .hero {
+            padding: 150px 0 80px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+        .hero h1 { font-size: 48px; margin-bottom: 20px; }
+        .hero p { font-size: 20px; opacity: 0.9; max-width: 600px; margin: 0 auto 30px; }
+        .hero-tagline { font-size: 16px; opacity: 0.8; margin-bottom: 40px; }
+        .app-icon {
+            width: 120px;
+            height: 120px;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .download-btn {
+            display: inline-block;
+            background: white;
+            color: var(--primary);
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: transform 0.3s;
+        }
+        .download-btn:hover { transform: scale(1.05); }
+        
+        /* Features */
+        .features { padding: 80px 0; }
+        .features h2 { text-align: center; font-size: 36px; margin-bottom: 50px; color: var(--dark); }
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .feature-card {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        .feature-icon { font-size: 40px; margin-bottom: 15px; }
+        .feature-card h3 { color: var(--primary); margin-bottom: 10px; }
+        
+        /* Instructions */
+        .instructions { padding: 80px 0; background: var(--white); }
+        .instructions h2 { text-align: center; font-size: 36px; margin-bottom: 50px; }
+        .steps {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .step {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            align-items: flex-start;
+        }
+        .step-number {
+            background: var(--primary);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        .step-content h3 { color: var(--dark); margin-bottom: 5px; }
+        .step-content p { color: #666; }
+        
+        /* Support */
+        .support { padding: 80px 0; text-align: center; }
+        .support h2 { font-size: 36px; margin-bottom: 20px; }
+        .support p { color: #666; margin-bottom: 30px; }
+        .coffee-btn {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 16px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        .coffee-btn:hover { background: var(--primary-light); }
+        
+        /* Contact */
+        .contact { padding: 60px 0; background: var(--dark); color: white; }
+        .contact-content { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+        .contact h3 { font-size: 24px; }
+        .contact a { color: var(--primary-light); }
+        .contact-links { display: flex; gap: 30px; }
+        .contact-links a { color: white; text-decoration: none; }
+        .contact-links a:hover { color: var(--primary-light); }
+        
+        /* Footer */
+        footer { padding: 30px 0; background: #3E2723; color: #999; text-align: center; }
+        footer a { color: #999; }
+        
+        /* Mobile */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .nav-links { display: none; }
+            .features-grid { grid-template-columns: 1fr; }
+            .contact-content { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="/" class="logo">❄️ RefiTrak</a>
+            <div class="nav-links">
+                <a href="#funkcje">Funkcje</a>
+                <a href="#instrukcja">Instrukcja</a>
+                <a href="#kontakt">Kontakt</a>
+                <a href="en.html" class="lang-switch">🇬🇧 English</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <img src="icon.png" alt="RefiTrak" class="app-icon">
+            <h1>RefiTrak</h1>
+            <p>Profesjonalna aplikacja do zarządzania magazynem czynników chłodniczych dla techników HVAC</p>
+            <p class="hero-tagline">❄️ Stworzony przez chłodniarza dla chłodniarzy ❄️</p>
+            <a href="#" class="download-btn">📱 Pobierz na Android</a>
+        </div>
+    </section>
+
+    <section class="features" id="funkcje">
+        <div class="container">
+            <h2>Funkcje aplikacji</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Zarządzanie magazynem</h3>
+                    <p>Śledź stan magazynowy 15 najpopularniejszych czynników chłodniczych. Ustaw początkowy stan i monitoruj zmiany.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3>Rejestracja zleceń</h3>
+                    <p>Dokumentuj każde zlecenie ze zdjęciami, notatkami i geolokalizacją. Eksportuj do PDF.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛒</div>
+                    <h3>Śledzenie zakupów</h3>
+                    <p>Rejestruj zakupy czynników z numerami faktur i danymi dostawców.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Roczne rozliczenie</h3>
+                    <p>Generuj roczne zestawienia wymagane przepisami. Eksportuj do CSV.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📍</div>
+                    <h3>Geolokalizacja</h3>
+                    <p>Dodawaj lokalizację GPS do zleceń. Dokumentuj miejsce wykonania prac.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Bezpieczeństwo</h3>
+                    <p>Zabezpiecz dane kodem PIN. Dane przechowywane lokalnie na urządzeniu.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="instructions" id="instrukcja">
+        <div class="container">
+            <h2>Jak korzystać z aplikacji?</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Utwórz PIN i wybierz czynniki</h3>
+                        <p>Przy pierwszym uruchomieniu ustaw 4-6 cyfrowy PIN i wybierz czynniki, którymi pracujesz.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Ustaw stan początkowy</h3>
+                        <p>Wprowadź aktualny stan magazynowy dla każdego wybranego czynnika.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Rejestruj zlecenia</h3>
+                        <p>Przy każdym zużyciu czynnika dodaj zlecenie - wybierz czynnik, wpisz ilość, dodaj zdjęcia i notatki.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Rejestruj zakupy</h3>
+                        <p>Każdy zakup czynnika wprowadź z numerem faktury i nazwą dostawcy.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Generuj rozliczenia</h3>
+                        <p>Na koniec roku eksportuj zestawienie do CSV - gotowe do przedstawienia podczas kontroli.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="support" id="wsparcie">
+        <div class="container">
+            <h2>Podoba Ci się aplikacja? ☕</h2>
+            <p>Jeśli RefiTrak pomaga Ci w codziennej pracy, możesz wesprzeć jego dalszy rozwój.</p>
+            <a href="https://buycoffee.to/refitrakstudio" target="_blank" class="coffee-btn">☕ Postaw kawę</a>
+        </div>
+    </section>
+
+    <section class="contact" id="kontakt">
+        <div class="container">
+            <div class="contact-content">
+                <div>
+                    <h3>Kontakt</h3>
+                    <p>Email: <a href="mailto:refiltrackstudio@gmail.com">refiltrackstudio@gmail.com</a></p>
+                </div>
+                <div class="contact-links">
+                    <a href="privacy.html">Polityka prywatności</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2024-2026 RefiTrak. Wszelkie prawa zastrzeżone.</p>
+            <p style="margin-top: 10px;">Stworzony przez chłodniarza dla chłodniarzy ❄️</p>
+        </div>
+    </footer>
+</body>
+</html>
